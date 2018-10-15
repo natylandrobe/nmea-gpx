@@ -5,14 +5,36 @@
 #include<string.h>
 #include<stdbool.h>
 
+#define COMA ","
+#define CANT_TOKEN 15
 #define MAX_LINE 300
-#define COMA ','
+//pasar a header <check.h>
 #define CHECK "$GPGGA,"
 #define CANT_CSUM 2
 #define ASTERISCO '*'
 
+
+//typedef struct fecha {int dia; int mes; int anio; int hora; int minutos; float segundos;};
+
+struct data {
+	//struct fecha f;
+	float lat;
+	float lon;
+	float ele;
+	float hdop;
+	float separacion;
+	int calidad;
+	int cantSat;
+};
+
+
+
 bool checkLine(char *s);
 unsigned char nmea_checksum(const char * s);
+struct data createStructure(char *s);
+
+
+
 
 int main (int argc, char *argv[]){
 	char linea[MAX_LINE];
@@ -23,6 +45,9 @@ int main (int argc, char *argv[]){
 			printf("%s", linea);
 			/*Aprox todo el programa va aca */
 
+			struct data hola = createStructure(linea);
+			printf("%d\n", hola.calidad);
+
 		}
 	}
 
@@ -30,6 +55,7 @@ int main (int argc, char *argv[]){
 }
 
 bool checkLine(char *s){
+
 	char checkSum[CANT_CSUM];
 	checkSum[0] = *(strrchr(s, ASTERISCO) + 1);
 	checkSum[1] = *(strrchr(s, ASTERISCO) + 2);
@@ -49,4 +75,32 @@ unsigned char nmea_checksum(const char * s){
 
 	return sum;
 }
+
+
+
+struct data createStructure(char *s){
+	char *str;
+	char *tokens[CANT_TOKEN];
+	struct data new;
+
+	str = strtok(s, COMA);
+	int i = 0;
+	while(str != NULL){
+		tokens[i] = str;
+		str = strtok(NULL, COMA);
+		
+		i++;
+	}
+	//new.fecha = ver parametros de funcion
+	//new.lat = convertirLat(tokens[2],tokens[3]);
+	//new.lon = convertirLon(tokens[4],tokens[5]);
+	new.calidad = atoi(tokens[6]);
+	new.cantSat = atoi(tokens[7]);
+	new.hdop = atof(tokens[8]);
+	new.ele = atof(tokens[9]);
+	new.separacion = atof(tokens[11]);
+
+	return new;
+}
+
 
