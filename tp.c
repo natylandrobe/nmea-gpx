@@ -1,17 +1,13 @@
 /*Es solo para empezar, lee el archivo nma y lo imprime.
 	Se ejecuta despues de compilar como: $ cat ejemplo.nma | ./<nombre_de_compilacion>*/
 #include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<stdbool.h>
+#include"check.h"
 
 #define COMA ","
 #define CANT_TOKEN 15
 #define MAX_LINE 300
 //pasar a header <check.h>
-#define CHECK "$GPGGA,"
-#define CANT_CSUM 2
-#define ASTERISCO '*'
+
 
 
 //typedef struct fecha {int dia; int mes; int anio; int hora; int minutos; float segundos;};
@@ -29,7 +25,7 @@ struct data {
 
 
 
-bool checkLine(char *s);
+//bool checkLine(char *s);
 unsigned char nmea_checksum(const char * s);
 struct data createStructure(char *s);
 
@@ -54,27 +50,7 @@ int main (int argc, char *argv[]){
 	return EXIT_SUCCESS;
 }
 
-bool checkLine(char *s){
 
-	char checkSum[CANT_CSUM];
-	checkSum[0] = *(strrchr(s, ASTERISCO) + 1);
-	checkSum[1] = *(strrchr(s, ASTERISCO) + 2);
-
-	if(strstr(s, CHECK) != NULL && nmea_checksum(s) == strtol(checkSum, NULL, 16))
-		return true;
-	return false;
-}
-
-unsigned char nmea_checksum(const char * s){
-	unsigned char sum = 0;
-	int i;
-
-	for(i = 1; s[i] != ASTERISCO; i++)
-		sum ^= s[i];
-
-
-	return sum;
-}
 
 
 
