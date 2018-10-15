@@ -2,11 +2,14 @@
 	Se ejecuta despues de compilar como: $ cat ejemplo.nma | ./<nombre_de_compilacion>*/
 #include<stdio.h>
 #include<stdlib.h>
+
+#define MAX_LINE 300
+
 int main (int argc, char *argv[]){
-	char linea[100];
+	char linea[MAX_LINE];
 	
-	while (fgets(linea,100,stdin)!=NULL){
-	printf("%s",linea);
+	while (fgets(linea, MAX_LINE, stdin) != NULL){
+		printf("%s", linea);
 	}
 
 	return EXIT_SUCCESS;
