@@ -2,7 +2,7 @@
 	Se ejecuta despues de compilar como: $ cat ejemplo.nma | ./<nombre_de_compilacion>*/
 #include<stdio.h>
 #include"check.h"
-#include "checkFuncs.c"
+
 #define COMA ","
 #define CANT_TOKEN 15
 #define MAX_LINE 300
