@@ -20,22 +20,22 @@ struct data {
 	int cantSat;
 };
 
-struct data createStructure(char *s);
+bool cargarStruct(char *s, struct data * new);
 
 int main (int argc, char *argv[]){
 	char linea[MAX_LINE];
+	struct data newS;
 	
 	while (fgets(linea, MAX_LINE, stdin) != NULL){
 
-		if(checkLine(linea)){
-			printf("%s", linea);
+		if(checkLine(linea) && cargarStruct(linea, &newS)){
 			/*Aprox todo el programa va aca */
-
-			struct data hola = createStructure(linea);
 			//prueban que funcionan las funciones de convertir lat y lon
-			printf("lat= %f\n", hola.lat); 
-			printf("lon= %f\n", hola.lon);
-
+			printf("lat = %f\n", newS.lat); 
+			printf("lon = %f\n", newS.lon);
+			printf("ele = %f\nhdop = %f\n", newS.ele, newS.hdop);
+			printf("sep = %f\ncal = %d\n", newS.separacion, newS.calidad);
+			printf("cant = %d\n", newS.cantSat);
 		}
 	}
 
@@ -43,13 +43,9 @@ int main (int argc, char *argv[]){
 }
 
 
-
-
-
-struct data createStructure(char *s){
+bool cargarStruct(char *s, struct data * new){
 	char *str;
 	char *tokens[CANT_TOKEN];
-	struct data new;
 	double lat, lon;
 
 	str = strtok(s, COMA);
@@ -62,18 +58,21 @@ struct data createStructure(char *s){
 
 	lat = convertirLat(tokens[2], tokens[3]);
 	lon = convertirLon(tokens[4], tokens[5]);
+	if(!checkLat(lat) || !checkLon(lon))
+		return false;
 	//new.fecha = ver parametros de funcion
-	new.lat = lat;
-	new.lon = lon;
-	new.calidad = atoi(tokens[6]);
-	new.cantSat = atoi(tokens[7]);
-	new.hdop = atof(tokens[8]);
-	new.ele = atof(tokens[9]);
-	new.separacion = atof(tokens[11]);
+	(*new).lat = lat;
+	(*new).lon = lon;
+	(*new).calidad = atoi(tokens[6]);
+	(*new).cantSat = atoi(tokens[7]);
+	(*new).hdop = atof(tokens[8]);
+	(*new).ele = atof(tokens[9]);
+	(*new).separacion = atof(tokens[11]);
 
-	if(checkLat(lat) && checkLon(lon))
-		return new;
 	
+	return true;
 }
+
+
 
 
