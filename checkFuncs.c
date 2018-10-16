@@ -4,6 +4,9 @@
 #define ASTERISCO '*'
 #define MAX_LAT 90.0
 #define MAX_LON 180.0
+#define MAX_CAL 8
+#define MAX_CANT 12
+#define MIN_CAL_CANT 0
 
 bool checkLine(char *s){
 
@@ -27,9 +30,9 @@ unsigned char nmea_checksum(const char * s){
 	return sum;
 }
 
-bool checkLat(double lat){
-	return !(lat > MAX_LAT || lat < -MAX_LAT);
-}
-bool checkLon(double lon){
-	return !(lon > MAX_LON || lon < -MAX_LON);
+bool checkMembers(double lat, double lon, int cal, int cant){
+	return !(lat  > MAX_LAT  || lat  < -MAX_LAT      ||
+			 lon  > MAX_LON  || lon  < -MAX_LON      ||
+			 cal  > MAX_CAL  || cal  <  MIN_CAL_CANT ||
+			 cant > MAX_CANT || cant <  MIN_CAL_CANT);
 }
