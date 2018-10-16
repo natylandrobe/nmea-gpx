@@ -1,62 +1,49 @@
 
+#include<stdlib.h>
+#include <math.h>
+#include <stdio.h>
 
-/*Funciones para la longitud y latitud.
-Probar si funcionan! */
-
-#define GRADO_MIN  100
-#define LATITUD_MAX 9000.000
-#define LATITUD_MIN 0
+#define DIGITO_GRADO  100.0
+#define LAT_MAX 9000.000
+#define GRADO_MIN 0
 #define MIN_POR_GRADO 60
-#define CARD_SUR "S"
-#define CARD_NORTE "N"
-#define CARD_ESTE "E"
-#define CARD_OESTE "W"
-#define LONG_MIN 0
+#define CARD_SUR 'S'
+#define CARD_NORTE 'N'
+#define CARD_ESTE 'E'
+#define CARD_OESTE 'W'
 #define LONG_MAX 18000
-#define VALOR_S -1
-#define VALOR_N 1
-#define VALOR_W -1
-#define VALOR_E 1
+#define VALOR_SW -1
 
-float convertirLon( const char lon[], const char cardinal){
+double convertirLon(const char lon[], const char * cardinal){
 
-float longitud;
+	double longitud = atof(lon);
 
-longitud = atoif(lon);
+	if(longitud < GRADO_MIN || longitud > LONG_MAX)
+		return 181;
+	if(*cardinal != CARD_ESTE && *cardinal != CARD_OESTE)
+		return 181;
 
-if(longitud < LONG_MIN || longitud > LONG_MAX)
-	return NULL;
-
-if( cardinal != CARD_ESTE && cardinal != CARD_OESTE){
-	return NULL;
-}else if( cardinal == CARD_OESTE){
-	longitud = longitud * VALOR_W;
-}else{
-	longitud = longitud * VALOR_E;
+	longitud = floor(longitud/ DIGITO_GRADO) + fmod(longitud, DIGITO_GRADO) / MIN_POR_GRADO;
+	
+	if(*cardinal == CARD_OESTE)
+		longitud *= VALOR_SW;
+	
+	return longitud;
 }
 
-return (int)longitud/GRADO_MIN + (longitud%GRADO_MIN)/MIN_POR_GRADO;
-}
+double convertirLat(const char lat[], const char * cardinal){
 
+	double latitud = atof(lat);
 
-float convertirLat( const char lat[], const char cardinal){
+	if(latitud < GRADO_MIN || latitud > LAT_MAX)
+		return 181;
+	if (*cardinal != CARD_NORTE && *cardinal != CARD_SUR)
+		return 181;
 
-float latitud;
-
-latitud=atof(lat);
-
-if(latitud < LATITUD_MIN || latitud > LATITUD_MAX)
-	return 0;
-
-if (cardinal != CARD_NORTE && cardinal != CARD_SUR){
-	return 0;
-
-}else if(cardinal == CARD_SUR){
-	latitud= latitud*VALOR_S;
-
-}else{
-	latitud = latitud * VALOR_N;
-}
-
-return (int)(latitud/GRADO_MIN) + (float)(latitud%GRADO_MIN)/MIN_POR_GRADO;
+	latitud = floor(latitud / DIGITO_GRADO) + fmod(latitud, DIGITO_GRADO) / MIN_POR_GRADO;
+	
+	if (*cardinal == CARD_SUR)
+		latitud *= VALOR_SW;
+	
+	return latitud;
 }

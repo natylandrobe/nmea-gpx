@@ -2,6 +2,8 @@
 #define CHECK "$GPGGA,"
 #define CANT_CSUM 2
 #define ASTERISCO '*'
+#define MAX_LAT 90.0
+#define MAX_LON 180.0
 
 bool checkLine(char *s){
 
@@ -23,4 +25,11 @@ unsigned char nmea_checksum(const char * s){
 
 
 	return sum;
+}
+
+bool checkLat(double lat){
+	return !(lat > MAX_LAT || lat < -MAX_LAT);
+}
+bool checkLon(double lon){
+	return !(lon > MAX_LON || lon < -MAX_LON);
 }
