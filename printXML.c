@@ -30,6 +30,8 @@ void printMetadata(char *name){
 	time_t rawtime;
 	struct tm timeinfo;
 
+	//printf("%s lala\n", name);
+
 	time(&rawtime);
 	timeinfo = *(localtime(&rawtime));
 

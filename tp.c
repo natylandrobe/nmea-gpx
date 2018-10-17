@@ -5,22 +5,29 @@
 #define CANT_TOKEN 15
 #define MAX_LINE 300
 
+
 void printMetadata(char *name);
 void printTrkC(void);
 void printStruct(struct data track);
 bool cargarStruct(char *s, struct data * new);
+status_t takeArgs(int argc, char *argv[], char **name);
+void print_help();
 
 int main (int argc, char *argv[]){
-	char linea[MAX_LINE];
-	struct data track;
-	
-	printMetadata("Ejemplo");
+	char linea[MAX_LINE], *name;
+	struct data track;	
+
+	if(takeArgs(argc, argv, &name) == ST_HELP){
+		print_help();
+		return 0;
+	}
+
+	printMetadata(name);
 
 	while (fgets(linea, MAX_LINE, stdin) != NULL){
 
 		if(checkLine(linea) && cargarStruct(linea, &track)){
 			/*Aprox todo el programa va aca */
-			//prueban que funcionan las funciones de convertir lat y lon
 			
 			printStruct(track);
 		}
