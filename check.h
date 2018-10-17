@@ -1,6 +1,6 @@
-#include<stdbool.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
 #include <math.h>
 
 unsigned char nmea_checksum(const char * s);
