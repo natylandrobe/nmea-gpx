@@ -13,15 +13,16 @@
 #define CARD_OESTE 'W'
 #define LONG_MAX 18000
 #define VALOR_SW -1
+#define ERR_LATLON 181
 
 double convertirLon(const char lon[], const char * cardinal){
 
 	double longitud = atof(lon);
 
 	if(longitud < GRADO_MIN || longitud > LONG_MAX)
-		return 181;
+		return ERR_LATLON;
 	if(*cardinal != CARD_ESTE && *cardinal != CARD_OESTE)
-		return 181;
+		return ERR_LATLON;
 
 	longitud = floor(longitud/ DIGITO_GRADO) + fmod(longitud, DIGITO_GRADO) / MIN_POR_GRADO;
 	
@@ -36,9 +37,9 @@ double convertirLat(const char lat[], const char * cardinal){
 	double latitud = atof(lat);
 
 	if(latitud < GRADO_MIN || latitud > LAT_MAX)
-		return 181;
+		return ERR_LATLON;
 	if (*cardinal != CARD_NORTE && *cardinal != CARD_SUR)
-		return 181;
+		return ERR_LATLON;
 
 	latitud = floor(latitud / DIGITO_GRADO) + fmod(latitud, DIGITO_GRADO) / MIN_POR_GRADO;
 	

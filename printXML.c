@@ -24,6 +24,7 @@
 #define TIME "<time>"
 #define TIME_C "</time>"
 #define YEAR_DIFF 1900
+#define MON_DIFF 1
 
 void printMetadata(char *name){
 	time_t rawtime;
@@ -42,7 +43,7 @@ void printMetadata(char *name){
 		    SPC2 TRKSEG "\n",
 		name,
 		timeinfo.tm_year + YEAR_DIFF,
-		timeinfo.tm_mon,
+		timeinfo.tm_mon + MON_DIFF,
 		timeinfo.tm_mday,
 		timeinfo.tm_hour,
 		timeinfo.tm_min,

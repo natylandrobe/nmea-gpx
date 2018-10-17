@@ -24,10 +24,10 @@ typedef enum estado{st_ing_valor,st_err,st_err_fuera_rango,st_pide_ayuda}status_
         **d=atol(st1);
 }*/
 //statust_t  ayuda( char argv[],long *anio,long *mes,long *dia,char nom [20]);
-int main(int argc, char *argv[]){
+/*int main(int argc, char *argv[]){
         status_t st;
         long anio=0,mes=0,dia=0;
-	char nom[20];
+	char nom[20];*/
 /*	st=ayuda(argv,&anio,&mes,&dia,nom);
 	switch (st){
 	case st_err: printf("valor mal Ingresado");break;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 	return 0;
 	}*/
 //	statust_t  ayuda( char argv[],long *anio,long *mes,long *dia,char nom [20]){
-	char st1[5];        
+	/*char st1[5];        
         size_t i=1;
         while(argv[i]!=NULL){
 
@@ -101,4 +101,4 @@ int main(int argc, char *argv[]){
 }
 	printf("%li %li %li",anio,mes,dia);
 	printf("%d",st);
-}
+}*/
