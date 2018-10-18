@@ -30,7 +30,6 @@ unsigned char nmea_checksum(const char * s){
 	for(i = 1; s[i] != ASTERISCO; i++)
 		sum ^= s[i];
 
-
 	return sum;
 }
 

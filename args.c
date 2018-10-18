@@ -3,18 +3,21 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "check.h"
+#include "print.h"
+
 
 #define DEFAULT_NAME "Default Name"
 #define YEAR_DIFF 1900
 #define MON_DIFF 1
 #define DIG_ANIO 10000
 #define DIG_MES 100
+#define CANT_DIG_FECHA 8
 #define ARG_YEAR "--year"
 #define ARG_MONTH "--month"
 #define ARG_DAY "--day"
-#define CANT_DIG_FECHA 8
 #define ARG_HELP "--help"
 #define ARG_NAME "--name"
+#define ARG_FORMAT "--format"
 #define MICROSEC 1000000.0
 
 bool cargarFecha(char *s, struct fecha *date);
@@ -68,17 +71,25 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 				case '-':
 					if(!strcmp(argv[i], ARG_HELP))
 						return ST_HELP;
-					if(!strcmp(argv[i], ARG_NAME))
-						*name = argv[i+1];
-					if(checkNum(argv[i+1])){
-						if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = atoi(argv[i+1])))
-							(*date).anio = anio;
-						else if(!strcmp(argv[i], ARG_MONTH) && checkMes(mes = atoi(argv[i+1])))
-							(*date).mes = mes;
-						else if(!strcmp(argv[i], ARG_DAY) && checkDia(dia = atoi(argv[i+1])))
-							(*date).dia = dia;
-						else
-							return ST_INV;
+
+					else if(argc > i + 1){
+						if(!strcmp(argv[i], ARG_NAME))
+							*name = argv[i+1];
+						else if(!strcmp(argv[i], ARG_FORMAT)){
+							if(!cargarFecha(argv[i+1], date))
+								return ST_INV;
+						}
+								
+						else if(checkNum(argv[i+1])){
+							if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = atoi(argv[i+1])))
+								(*date).anio = anio;
+							else if(!strcmp(argv[i], ARG_MONTH) && checkMes(mes = atoi(argv[i+1])))
+								(*date).mes = mes;
+							else if(!strcmp(argv[i], ARG_DAY) && checkDia(dia = atoi(argv[i+1])))
+								(*date).dia = dia;
+							else
+								return ST_INV;
+						}
 					}
 					else
 						return ST_INV;
@@ -88,9 +99,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 	return ST_OK;
 }
 
-void print_help(){
-	printf("HELP\n");
-}
+
 
 bool cargarFecha(char *s, struct fecha *date){
 	int fecha, mes, dia, anio;
