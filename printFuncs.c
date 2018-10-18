@@ -77,6 +77,6 @@ void printStruct(struct data track){
 		track.f.segundos);
 }
 
-void print_help(){
+void printHelp(void){
 	printf(HELP "\n");
 }

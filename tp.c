@@ -18,10 +18,10 @@ int main (int argc, char *argv[]){
 	status_t st;
 
 	if((st = takeArgs(argc, argv, &name, &date)) == ST_HELP){
-		print_help();
+		printHelp();
 		return 0;
 	}
-	//else if(true){
+	
 	else if(st == ST_INV){
 		fprintf(stderr, "%s\n", MSJ_ERR_INV);
 		return 0;
