@@ -65,7 +65,7 @@ void printTrkC(void){
 void printStruct(struct data track){
 	printf(SPC3 TRKPT_START "%f" TRKPT_MID "%f" TRKPT_FIN "\n"
 			SPC3 SPC ELE "%f" ELE_C "\n"
-			SPC3 SPC TIME "%d" GUION "%d" GUION "%d" T "%d" DOSPUNT "%d" DOSPUNT "SEG" Z TIME_C "\n"
+			SPC3 SPC TIME "%d" GUION "%d" GUION "%d" T "%d" DOSPUNT "%d" DOSPUNT "%.3f" Z TIME_C "\n"
 			SPC3 TRKPT_C "\n",
 		track.lat,
 		track.lon,
@@ -74,5 +74,6 @@ void printStruct(struct data track){
 		track.f.mes,
 		track.f.dia,
 		track.f.hora,
-		track.f.minutos);
+		track.f.minutos,
+		track.f.segundos);
 }

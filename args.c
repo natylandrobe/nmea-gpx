@@ -1,8 +1,9 @@
-
+#include <sys/time.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include "check.h"
+
 #define DEFAULT_NAME "Default Name"
 #define YEAR_DIFF 1900
 #define MON_DIFF 1
@@ -13,6 +14,8 @@
 #define ARG_DAY "--day"
 #define CANT_DIG_FECHA 8
 #define ARG_HELP "--help"
+#define ARG_NAME "--name"
+#define MICROSEC 1000000.0
 
 bool cargarFecha(char *s, struct fecha *date);
 void defaultFecha(struct fecha *def);
@@ -65,6 +68,8 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 				case '-':
 					if(!strcmp(argv[i], ARG_HELP))
 						return ST_HELP;
+					if(!strcmp(argv[i], ARG_NAME))
+						*name = argv[i+1];
 					if(checkNum(argv[i+1])){
 						if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = atoi(argv[i+1])))
 							(*date).anio = anio;
@@ -109,7 +114,10 @@ bool cargarFecha(char *s, struct fecha *date){
 void defaultFecha(struct fecha *def){
 	time_t rawtime;
    	struct tm *info;
+   	struct timeval millisec;
    	time(&rawtime);
+	gettimeofday(&millisec, NULL);
+
    	info = localtime(&rawtime);
 
 	(*def).anio = (*info).tm_year + YEAR_DIFF;
@@ -117,6 +125,7 @@ void defaultFecha(struct fecha *def){
 	(*def).dia = (*info).tm_mday;
 	(*def).hora = (*info).tm_hour;
 	(*def).minutos = (*info).tm_min;
+	(*def).segundos = (*info).tm_sec + (millisec.tv_usec / MICROSEC);
 }
 
 bool checkNum(char *s){

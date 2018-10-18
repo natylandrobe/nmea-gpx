@@ -73,6 +73,3 @@ bool cargarStruct(char *s, struct data * new, struct fecha date){
 	
 	return true;
 }
-
-
-
