@@ -7,6 +7,10 @@
 #define MAX_CAL 8
 #define MAX_CANT 12
 #define MIN_CAL_CANT 0
+#define MIN_ANIOMESDIA 1
+#define MAX_MES 12
+#define MAX_DIA 31
+#define MAX_ANIO 9999
 
 bool checkLine(char *s){
 
@@ -35,4 +39,14 @@ bool checkMembers(double lat, double lon, int cal, int cant){
 			 lon  > MAX_LON  || lon  < -MAX_LON      ||
 			 cal  > MAX_CAL  || cal  <  MIN_CAL_CANT ||
 			 cant > MAX_CANT || cant <  MIN_CAL_CANT);
+}
+
+bool checkDia(int dia){
+	return !(dia < MIN_ANIOMESDIA || dia > MAX_DIA);
+}
+bool checkMes(int mes){
+	return !(mes < MIN_ANIOMESDIA || mes > MAX_MES);
+}
+bool checkAnio(int anio){
+	return !(anio < MIN_ANIOMESDIA || anio > MAX_ANIO);
 }
