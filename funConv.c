@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include <math.h>
 #include <stdio.h>
+#include "structData.h"
 
 #define DIGITO_GRADO  100.0
 #define LAT_MAX 9000.000
@@ -47,4 +48,37 @@ double convertirLat(const char lat[], const char * cardinal){
 		latitud *= VALOR_SW;
 	
 	return latitud;
+}
+
+cal_t convertirCal(int cal){
+	switch (cal){
+		case 0: 
+			cal = invalido;
+			break;
+		case 1:
+			cal = fix_GPS;
+			break;
+		case 2: 
+			cal = fix_DGPS;
+			break;
+		case 3:
+			cal = fix_PPS;
+			break;
+		case 4: 
+			cal = real_time_kinematic;
+			break;
+		case 5:
+			cal = float_rtk;
+			break;
+		case 6:
+			cal = estimada;
+			break;
+		case 7: 
+			cal = manual;
+			break;
+		case 8:
+			cal = simulacion;
+		
+	}
+	return cal;
 }
