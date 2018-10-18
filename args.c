@@ -34,45 +34,41 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 		//se fija si el argumento empieza con -
 		if (*argv[i] == '-'){
 			c = *(argv[i]+1);
-			switch (c){
-				case 'h':
-				case 'H':
-					return ST_HELP;
-				case 'n':
-				case 'N':
-					*name = argv[i+1];
-					break;
-				case 'f':
-				case 'F':
-					if(!cargarFecha(argv[i+1], date))
-						return ST_INV;
-					break;
-				case 'y':
-				case 'Y':
-					if(checkNum(argv[i+1]) && checkAnio(anio = atoi(argv[i+1])))
-						(*date).anio = anio;
-					else
-						return ST_INV;
-					break;
-				case 'm':
-				case 'M':
-					if(checkNum(argv[i+1]) && checkMes(mes = atoi(argv[i+1])))
-						(*date).mes = mes;
-					else
-						return ST_INV;
-					break;
-				case 'd':
-				case 'D':
-					if(checkNum(argv[i+1]) && checkDia(dia = atoi(argv[i+1])))
-						(*date).dia = dia;
-					else
-						return ST_INV;
-					break;
-				case '-':
-					if(!strcmp(argv[i], ARG_HELP))
-						return ST_HELP;
-
-					else if(argc > i + 1){
+			if(c == 'h' || c == 'H' || !strcmp(argv[i], ARG_HELP))
+				return ST_HELP;
+			else if(argc > i + 1){
+				switch (c){
+					case 'n':
+					case 'N':
+						*name = argv[i+1];
+						break;
+					case 'f':
+					case 'F':
+						if(!cargarFecha(argv[i+1], date))
+							return ST_INV;
+						break;
+					case 'y':
+					case 'Y':
+						if(checkNum(argv[i+1]) && checkAnio(anio = atoi(argv[i+1])))
+							(*date).anio = anio;
+						else
+							return ST_INV;
+						break;
+					case 'm':
+					case 'M':
+						if(checkNum(argv[i+1]) && checkMes(mes = atoi(argv[i+1])))
+							(*date).mes = mes;
+						else
+							return ST_INV;
+						break;
+					case 'd':
+					case 'D':
+						if(checkNum(argv[i+1]) && checkDia(dia = atoi(argv[i+1])))
+							(*date).dia = dia;
+						else
+							return ST_INV;
+						break;
+					case '-':
 						if(!strcmp(argv[i], ARG_NAME))
 							*name = argv[i+1];
 						else if(!strcmp(argv[i], ARG_FORMAT)){
@@ -90,9 +86,9 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 							else
 								return ST_INV;
 						}
-					}
-					else
-						return ST_INV;
+						else
+							return ST_INV;
+				}
 			}
 		}
 	}
