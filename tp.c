@@ -1,16 +1,15 @@
 #include <stdbool.h>
 #include "check.h"
+#include "print.h"
 #define COMA ","
 #define CANT_TOKEN 15
 #define MAX_LINE 300
 #define MSJ_ERR_INV "Ingrese un dato valido"
 
-void printMetadata(char *name);
-void printTrkC(void);
-void printStruct(struct data track);
+
+
 bool cargarStruct(char *s, struct data * new, struct fecha date);
 status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date);
-void print_help();
 
 int main (int argc, char *argv[]){
 	char linea[MAX_LINE], *name;
@@ -19,9 +18,10 @@ int main (int argc, char *argv[]){
 	status_t st;
 
 	if((st = takeArgs(argc, argv, &name, &date)) == ST_HELP){
-		print_help();
+		printHelp();
 		return 0;
 	}
+	
 	else if(st == ST_INV){
 		fprintf(stderr, "%s\n", MSJ_ERR_INV);
 		return 0;
@@ -73,6 +73,3 @@ bool cargarStruct(char *s, struct data * new, struct fecha date){
 	
 	return true;
 }
-
-
-

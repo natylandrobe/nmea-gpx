@@ -30,6 +30,8 @@
 #define YEAR_DIFF 1900
 #define MON_DIFF 1
 
+#define HELP "Utilice los argumentos:\n-n o --name para ingresar el nombre de la ruta\n-f o --format aaaammdd para ingresar el anio, mes y dia\n-y o --year para ingresar el anio con la centuria\n-m o --month para ingresar el numero de mes y\n-d o --day para ingresar el numero de dia del mes \n"
+
 void printMetadata(char *name){
 	time_t rawtime;
    	struct tm *timeinfo;
@@ -51,9 +53,6 @@ void printMetadata(char *name){
 		(*timeinfo).tm_hour,
 		(*timeinfo).tm_min,
 		(*timeinfo).tm_sec);
-
-
-
 }
 
 void printTrkC(void){
@@ -65,7 +64,7 @@ void printTrkC(void){
 void printStruct(struct data track){
 	printf(SPC3 TRKPT_START "%f" TRKPT_MID "%f" TRKPT_FIN "\n"
 			SPC3 SPC ELE "%f" ELE_C "\n"
-			SPC3 SPC TIME "%d" GUION "%d" GUION "%d" T "%d" DOSPUNT "%d" DOSPUNT "SEG" Z TIME_C "\n"
+			SPC3 SPC TIME "%d" GUION "%d" GUION "%d" T "%d" DOSPUNT "%d" DOSPUNT "%.3f" Z TIME_C "\n"
 			SPC3 TRKPT_C "\n",
 		track.lat,
 		track.lon,
@@ -74,5 +73,10 @@ void printStruct(struct data track){
 		track.f.mes,
 		track.f.dia,
 		track.f.hora,
-		track.f.minutos);
+		track.f.minutos,
+		track.f.segundos);
+}
+
+void printHelp(void){
+	printf(HELP "\n");
 }
