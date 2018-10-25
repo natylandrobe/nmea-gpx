@@ -34,6 +34,7 @@ unsigned char nmea_checksum(const char * s){
 }
 
 bool checkMembers(double lat, double lon, int cal, int cant){
+
 	return !(lat  > MAX_LAT  || lat  < -MAX_LAT      ||
 			 lon  > MAX_LON  || lon  < -MAX_LON      ||
 			 cal  > MAX_CAL  || cal  <  MIN_CAL_CANT ||
@@ -41,11 +42,15 @@ bool checkMembers(double lat, double lon, int cal, int cant){
 }
 
 bool checkDia(int dia){
+
+
 	return !(dia < MIN_ANIOMESDIA || dia > MAX_DIA);
 }
 bool checkMes(int mes){
+
 	return !(mes < MIN_ANIOMESDIA || mes > MAX_MES);
 }
 bool checkAnio(int anio){
+	
 	return !(anio < MIN_ANIOMESDIA || anio > MAX_ANIO);
 }

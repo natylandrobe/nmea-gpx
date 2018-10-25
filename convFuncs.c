@@ -1,20 +1,9 @@
 
-#include<stdlib.h>
+#include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
 #include "structData.h"
-
-#define DIGITO_GRADO  100.0
-#define LAT_MAX 9000.000
-#define GRADO_MIN 0
-#define MIN_POR_GRADO 60
-#define CARD_SUR 'S'
-#define CARD_NORTE 'N'
-#define CARD_ESTE 'E'
-#define CARD_OESTE 'W'
-#define LONG_MAX 18000
-#define VALOR_SW -1
-#define ERR_LATLON 181
+#include "defines.h"
 
 double convertirLon(const char lon[], const char * cardinal){
 
@@ -51,6 +40,7 @@ double convertirLat(const char lat[], const char * cardinal){
 }
 
 cal_t convertirCal(int cal){
+
 	switch (cal){
 		case 0: 
 			cal = invalido;
@@ -78,6 +68,7 @@ cal_t convertirCal(int cal){
 			break;
 		case 8:
 			cal = simulacion;
+			break;
 		
 	}
 	return cal;

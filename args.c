@@ -4,79 +4,70 @@
 #include <stdlib.h>
 #include "check.h"
 #include "print.h"
-
-
-#define DEFAULT_NAME "Default Name"
-#define YEAR_DIFF 1900
-#define MON_DIFF 1
-#define DIG_ANIO 10000
-#define DIG_MES 100
-#define CANT_DIG_FECHA 8
-#define ARG_YEAR "--year"
-#define ARG_MONTH "--month"
-#define ARG_DAY "--day"
-#define ARG_HELP "--help"
-#define ARG_NAME "--name"
-#define ARG_FORMAT "--format"
-#define MICROSEC 1000000.0
-
-bool cargarFecha(char *s, struct fecha *date);
-void defaultFecha(struct fecha *def);
-bool checkNum(char *s);
+#include "defArgs.h"
 
 status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
-	int i, c;
+	int i, argumento, mes, dia, anio;
+
 	*name = DEFAULT_NAME;
 	defaultFecha(date);
-	int mes, dia, anio;
+	
 
 	for (i = 1; i < argc; i++){
 		//se fija si el argumento empieza con -
 		if (*argv[i] == '-'){
-			c = *(argv[i]+1);
-			if(c == 'h' || c == 'H' || !strcmp(argv[i], ARG_HELP))
+			argumento = *(argv[i]+1);
+			if( argumento == 'h' || argumento == 'H' || !strcmp(argv[i], ARG_HELP)){
 				return ST_HELP;
+			}
 			else if(argc > i + 1){
-				switch (c){
+				switch (argumento){
 					case 'n':
 					case 'N':
 						*name = argv[i+1];
 						break;
 					case 'f':
 					case 'F':
-						if(!cargarFecha(argv[i+1], date))
+						if(!cargarFecha(argv[i+1], date)){
 							return ST_INV;
+						}
 						break;
 					case 'y':
 					case 'Y':
-						if(checkNum(argv[i+1]) && checkAnio(anio = atoi(argv[i+1])))
+						if(checkNum(argv[i+1]) && checkAnio(anio = atoi(argv[i+1]))){
 							(*date).anio = anio;
+						}
 						else
 							return ST_INV;
 						break;
 					case 'm':
 					case 'M':
-						if(checkNum(argv[i+1]) && checkMes(mes = atoi(argv[i+1])))
+						if(checkNum(argv[i+1]) && checkMes(mes = atoi(argv[i+1]))){
 							(*date).mes = mes;
+						}
 						else
 							return ST_INV;
 						break;
 					case 'd':
 					case 'D':
-						if(checkNum(argv[i+1]) && checkDia(dia = atoi(argv[i+1])))
+						if(checkNum(argv[i+1]) && checkDia(dia = atoi(argv[i+1]))){
 							(*date).dia = dia;
+						}
 						else
 							return ST_INV;
 						break;
 					case '-':
-						if(!strcmp(argv[i], ARG_NAME))
+						if(!strcmp(argv[i], ARG_NAME)){
 							*name = argv[i+1];
+						}
 						else if(!strcmp(argv[i], ARG_FORMAT)){
-							if(!cargarFecha(argv[i+1], date))
+							if(!cargarFecha(argv[i+1], date)){
 								return ST_INV;
+							}
 						}
 								
 						else if(checkNum(argv[i+1])){
+
 							if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = atoi(argv[i+1])))
 								(*date).anio = anio;
 							else if(!strcmp(argv[i], ARG_MONTH) && checkMes(mes = atoi(argv[i+1])))
@@ -98,6 +89,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 
 
 bool cargarFecha(char *s, struct fecha *date){
+
 	int fecha, mes, dia, anio;
 	if(!(checkNum(s)) || strlen(s) != CANT_DIG_FECHA)
 		return false;
@@ -108,10 +100,12 @@ bool cargarFecha(char *s, struct fecha *date){
 	dia = ((fecha % DIG_ANIO) % DIG_MES);
 
 	(*date).anio = anio;
-	if(checkMes(mes))
+	if(checkMes(mes)){
 		(*date).mes = mes;
-	if(checkDia(dia))
+	}
+	if(checkDia(dia)){
 		(*date).dia = dia;
+	}
 
 	return true;
 }
@@ -136,7 +130,7 @@ void defaultFecha(struct fecha *def){
 bool checkNum(char *s){
 	size_t i;
 	for(i = 0; i < strlen(s); i++)
-		if(!(s[i] >= '0' && s[i] <= '9'))
+		if(!(s[i] >= MIN_NUM && s[i] <= MAX_NUM))
 			return false;
 	return true;
 }
