@@ -1,36 +1,5 @@
 #include "structData.h"
-
-#define TRK "<trk>"
-#define TRK_C "</trk>"
-#define TRKSEG "<trkseg>"
-#define TRKSEG_C "</trkseg>"
-#define TRKPT_START "<trackpt lat=\""
-#define TRKPT_MID "\" lon=\""
-#define TRKPT_FIN "\">"
-#define ELE "<ele>"
-#define ELE_C "</ele>"
-#define TRKPT_C "</trkpt>"
-#define SPC  "   "
-#define SPC2 "      "
-#define SPC3 "         "
-#define GUION "-"
-#define T "T"
-#define Z "Z"
-#define DOSPUNT ":"
-#define XML "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-#define GPX "<gpx version=\"1.1\" creator=\"nmea-gpx\" xmlns=\"http://www.topografix.com/GPX/1/1\">"
-#define GPX_C "</gpx>"
-
-#define META "<metadata>"
-#define META_C "</metadata>"
-#define NAME "<name>"
-#define NAME_C "</name>"
-#define TIME "<time>"
-#define TIME_C "</time>"
-#define YEAR_DIFF 1900
-#define MON_DIFF 1
-
-#define HELP "Utilice los argumentos:\n-n o --name para ingresar el nombre de la ruta\n-f o --format aaaammdd para ingresar el anio, mes y dia\n-y o --year para ingresar el anio con la centuria\n-m o --month para ingresar el numero de mes y\n-d o --day para ingresar el numero de dia del mes \n"
+#include "xml.h"
 
 void printMetadata(char *name){
 	time_t rawtime;
@@ -38,45 +7,52 @@ void printMetadata(char *name){
    	time(&rawtime);
    	timeinfo = localtime(&rawtime);
 
-	printf(XML "\n");
-	printf(GPX "\n");
-	printf(SPC META "\n"
-			SPC2 NAME "%s" NAME_C "\n"
-			SPC2 TIME "%d" GUION "%d" GUION "%d" T "%d" DOSPUNT "%d" DOSPUNT "%d" Z TIME_C "\n"
-		    SPC META_C "\n"
-		    SPC TRK "\n"
-		    SPC2 TRKSEG "\n",
-		name,
+   	printf("%s\n", XML);
+	printf("%s\n", GPX);
+	printf("%s%s\n%s%s%s%s\n%s%s%d-%d-%d%s%d:%d:%s%s%d\n%s%s\n%s%s\n%s%s\n",
+		SPC,META,
+		SPC2,NAME,name,NAME_C,
+		SPC2,TIME,
 		(*timeinfo).tm_year + YEAR_DIFF,
 		(*timeinfo).tm_mon + MON_DIFF,
 		(*timeinfo).tm_mday,
+		T,
 		(*timeinfo).tm_hour,
 		(*timeinfo).tm_min,
-		(*timeinfo).tm_sec);
+		Z,
+		TIME_C,
+		(*timeinfo).tm_sec,
+		SPC,META_C,
+		SPC,TRK,
+		SPC2,TRKSEG);
 }
 
 void printTrkC(void){
-	printf(SPC2 TRKSEG_C "\n"
-			SPC TRK_C    "\n"
-				GPX_C    "\n");
+
+	printf("%s%s\n%s%s\n%s\n",
+			SPC2,TRKSEG_C,
+			SPC, TRK_C,
+			GPX_C);
 }
 
 void printStruct(struct data track){
-	printf(SPC3 TRKPT_START "%f" TRKPT_MID "%f" TRKPT_FIN "\n"
-			SPC3 SPC ELE "%f" ELE_C "\n"
-			SPC3 SPC TIME "%d" GUION "%d" GUION "%d" T "%d" DOSPUNT "%d" DOSPUNT "%.3f" Z TIME_C "\n"
-			SPC3 TRKPT_C "\n",
+
+
+	printf("%s%s%f%s%f%s\n%s%s%s%f%s\n%s%s%s%d-%d-%d%s%d:%d:%.3f%s%s\n%s%s\n",
+		SPC3, TRKPT_START,
 		track.lat,
+		TRKPT_MID,
 		track.lon,
+		TRKPT_FIN,
+		SPC3, SPC, ELE,
 		track.ele,
-		track.f.anio,
-		track.f.mes,
-		track.f.dia,
-		track.f.hora,
-		track.f.minutos,
-		track.f.segundos);
+		ELE_C,
+		SPC3, SPC, TIME,track.f.anio, track.f.mes, track.f.dia,
+		T,track.f.hora,track.f.minutos,track.f.segundos,
+		Z, TIME_C,
+		SPC3, TRKPT_C);
 }
 
 void printHelp(void){
-	printf(HELP "\n");
+	printf("%s\n", HELP);
 }

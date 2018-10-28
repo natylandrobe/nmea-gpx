@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "structData.h"
-#include "defines.h"
+#include "xml.h"
 
 double convertirLon(const char lon[], const char * cardinal){
 

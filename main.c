@@ -1,20 +1,7 @@
 #include <stdbool.h>
 #include "check.h"
 #include "print.h"
-#define DELIM ","
-#define CANT_TOKEN 15
-#define MAX_LINE 300
-#define MSJ_ERR_INV "Ingrese un dato valido"
-#define INDEX_LAT 2
-#define INDEX_LAT_CARD 3
-#define INDEX_LON 4
-#define INDEX_LON_CARD 5
-#define INDEX_CAL 6
-#define INDEX_CANT 7
-#define INDEX_HDOP 8
-#define INDEX_ELE 9
-#define INDEX_SEP 11
-#define END_STR '\0'
+#include "funcmain.h"
 
 int main (int argc, char *argv[]){
 

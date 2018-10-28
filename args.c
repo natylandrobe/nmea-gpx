@@ -140,7 +140,7 @@ void defaultFecha(struct fecha *def){
 bool checkNum(char *s){
 	size_t i;
 	for(i = 0; i < strlen(s); i++){
-		if(!(s[i] >= MIN_NUM && s[i] <= MAX_NUM)){
+		if(!(s[i] >= MIN_DIG && s[i] <= MAX_DIG)){
 			return false;
 		}
 	}
