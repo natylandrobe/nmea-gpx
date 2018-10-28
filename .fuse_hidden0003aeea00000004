@@ -17,10 +17,10 @@ struct data {
 	struct fecha f;
 	double lat;
 	double lon;
-	double ele;
-	double hdop;
-	double separacion;
+	float ele;
+	float hdop;
+	float separacion;
 	cal_t calidad;
-	long int cantSat;
+	int cantSat;
 };
 
