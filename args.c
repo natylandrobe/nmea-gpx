@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "check.h"
 #include "print.h"
+<<<<<<< HEAD
 
 
 #define DEFAULT_NAME "Default Name"
@@ -23,22 +24,35 @@
 bool cargarFecha(char *s, struct fecha *date);
 void defaultFecha(struct fecha *def);
 bool checkNum(char *s);
+=======
+#include "defArgs.h"
+>>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba
 
 status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
-	int i, c;
+	int i, argumento, mes, dia, anio;
+
 	*name = DEFAULT_NAME;
 	defaultFecha(date);
-	int mes, dia, anio;
+	
 
 	for (i = 1; i < argc; i++){
 		//se fija si el argumento empieza con -
 		if (*argv[i] == '-'){
+<<<<<<< HEAD
 			c = *(argv[i]+1);
 			if(c == 'h' || c == 'H' || !strcmp(argv[i], ARG_HELP)){
 				return ST_HELP;
 			}
 			else if(argc > i + 1){
 				switch (c){
+=======
+			argumento = *(argv[i]+1);
+			if( argumento == 'h' || argumento == 'H' || !strcmp(argv[i], ARG_HELP)){
+				return ST_HELP;
+			}
+			else if(argc > i + 1){
+				switch (argumento){
+>>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba
 					case 'n':
 					case 'N':
 						*name = argv[i+1];
@@ -70,6 +84,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 						if(checkNum(argv[i+1]) && checkDia(dia = atoi(argv[i+1]))){
 							(*date).dia = dia;
 						}
+<<<<<<< HEAD
 						else
 							return ST_INV;
 						break;
@@ -98,6 +113,34 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 						}
 						else
 							return ST_INV;
+=======
+						else
+							return ST_INV;
+						break;
+					case '-':
+						if(!strcmp(argv[i], ARG_NAME)){
+							*name = argv[i+1];
+						}
+						else if(!strcmp(argv[i], ARG_FORMAT)){
+							if(!cargarFecha(argv[i+1], date)){
+								return ST_INV;
+							}
+						}
+								
+						else if(checkNum(argv[i+1])){
+
+							if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = atoi(argv[i+1])))
+								(*date).anio = anio;
+							else if(!strcmp(argv[i], ARG_MONTH) && checkMes(mes = atoi(argv[i+1])))
+								(*date).mes = mes;
+							else if(!strcmp(argv[i], ARG_DAY) && checkDia(dia = atoi(argv[i+1])))
+								(*date).dia = dia;
+							else
+								return ST_INV;
+						}
+						else
+							return ST_INV;
+>>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba
 				}
 			}
 		}
@@ -108,6 +151,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 
 
 bool cargarFecha(char *s, struct fecha *date){
+
 	int fecha, mes, dia, anio;
 	if(!(checkNum(s)) || strlen(s) != CANT_DIG_FECHA){
 		return false;
@@ -149,7 +193,11 @@ void defaultFecha(struct fecha *def){
 bool checkNum(char *s){
 	size_t i;
 	for(i = 0; i < strlen(s); i++)
+<<<<<<< HEAD
 		if(!(s[i] >= '0' && s[i] <= '9')){
+=======
+		if(!(s[i] >= MIN_NUM && s[i] <= MAX_NUM))
+>>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba
 			return false;
 		}
 	return true;
