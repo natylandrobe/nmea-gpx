@@ -46,12 +46,8 @@ double convertirLat(const char lat[], const char * cardinal){
 	return latitud;
 }
 
-<<<<<<< HEAD:convFuncs.c
-cal_t convertirCal(long int cal){
-=======
-cal_t convertirCal(int cal){
 
->>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba:convFuncs.c
+cal_t convertirCal(long int cal){
 	switch (cal){
 		case 0: 
 			cal = invalido;

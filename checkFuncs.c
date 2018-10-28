@@ -36,20 +36,12 @@ unsigned char nmea_checksum(const char * s){
 
 	for(i = 1; s[i] != ASTERISCO; i++){
 		sum ^= s[i];
-<<<<<<< HEAD
 	}
-=======
->>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba
 
 	return sum;
 }
 
-<<<<<<< HEAD
 bool checkMembers(double lat, double lon, cal_t cal, long int cant){
-=======
-bool checkMembers(double lat, double lon, int cal, int cant){
-
->>>>>>> 47befa56bdc96a596bd2810f8cbdd7e6711154ba
 	return !(lat  > MAX_LAT  || lat  < -MAX_LAT      ||
 			 lon  > MAX_LON  || lon  < -MAX_LON      ||
 			 cal  > MAX_CAL  || cal  <  MIN_CAL_CANT ||

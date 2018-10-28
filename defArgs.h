@@ -11,8 +11,8 @@
 #define ARG_NAME "--name"
 #define ARG_FORMAT "--format"
 #define MICROSEC 1000000.0
-#define MAX_NUM 9
-#define MIN_NUM 0
+#define MAX_DIG '9'
+#define MIN_DIG '0'
 
 bool cargarFecha(char *s, struct fecha *date);
 void defaultFecha(struct fecha *def);
