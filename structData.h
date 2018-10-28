@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
-typedef enum {ST_OK, ST_HELP, ST_INV} status_t;
+typedef enum {ST_INV, ST_HELP, ST_OK, ST_EPTNULL} status_t;
 typedef enum{invalido, fix_GPS, fix_DGPS, fix_PPS, real_time_kinematic, float_rtk, estimada, manual, simulacion} cal_t;
 
 struct fecha {
