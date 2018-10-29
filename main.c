@@ -20,6 +20,10 @@ int main (int argc, char *argv[]){
 		return EXIT_FAILURE;
 	}
 
+	else if(st == ST_EPTNULL){
+		return EXIT_FAILURE;
+	}
+
 	printMetadata(name);
 
 	while (fgets(linea, MAX_LINE, stdin) != NULL){
