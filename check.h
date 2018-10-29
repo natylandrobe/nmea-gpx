@@ -1,3 +1,6 @@
+#ifndef CHECK_H
+#define CHECK_H
+
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,3 +16,5 @@ bool checkDia(int dia);
 bool checkMes(int mes);
 bool checkAnio(int anio);
 cal_t convertirCal(long int cal);
+
+#endif

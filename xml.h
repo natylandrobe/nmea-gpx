@@ -1,3 +1,6 @@
+#ifndef XML_H
+#define XML_H
+
 #define TRK "<trk>"
 #define TRK_C "</trk>"
 #define TRKSEG "<trkseg>"
@@ -39,3 +42,5 @@
 #define LONG_MAX 18000
 #define VALOR_SW -1
 #define ERR_LATLON 181
+
+#endif

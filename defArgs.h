@@ -1,3 +1,6 @@
+#ifndef DEFARGS_H
+#define DEFARGS_H
+
 #include <ctype.h>
 
 #define DEFAULT_NAME "Default Name"
@@ -28,3 +31,5 @@
 bool cargarFecha(char *s, struct fecha *date);
 status_t defaultFecha(struct fecha *def);
 bool checkNum(char *s);
+
+#endif

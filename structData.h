@@ -1,3 +1,6 @@
+#ifndef STRUCTDATA_H
+#define STRUCTDATA_H
+
 #include <stdio.h>
 #include <time.h>
 
@@ -24,3 +27,4 @@ struct data {
 	long int cantSat;
 };
 
+#endif
