@@ -1,10 +1,5 @@
-#include <sys/time.h>
-#include <string.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include "check.h"
-#include "print.h"
 #include "defArgs.h"
+
 
 status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 	int i, argumento, mes, dia, anio;
@@ -111,61 +106,3 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 
 
 
-bool cargarFecha(char *s, struct fecha *date){
-
-	int fecha, mes, dia, anio;
-
-	if(!s || !date || !(checkNum(s)) || strlen(s) != CANT_DIG_FECHA){
-		return false;
-	}
-	fecha = atoi(s);
-
-	anio = fecha / DIG_ANIO;
-	mes = (fecha % DIG_ANIO) / DIG_MES;
-	dia = ((fecha % DIG_ANIO) % DIG_MES);
-
-	(*date).anio = anio;
-	if(checkMes(mes)){
-		date->mes = mes;
-	}
-	if(checkDia(dia)){
-		date->dia = dia;
-	}
-
-	return true;
-}
-
-status_t defaultFecha(struct fecha *def){
-
-	time_t rawtime;
-   	struct tm *info;
-   	struct timeval millisec;
-
-   	if(!def){
-   		return ST_EPTNULL;
-   	}
-
-   	time(&rawtime);
-	gettimeofday(&millisec, NULL);
-
-   	info = localtime(&rawtime);
-
-	def->anio = info->tm_year + YEAR_DIFF;
-	def->mes = info->tm_mon + MON_DIFF;
-	def->dia = info->tm_mday;
-	def->hora = info->tm_hour;
-	def->minutos = info->tm_min;
-	def->segundos = info->tm_sec + (millisec.tv_usec / MICROSEC);
-
-	return ST_OK;
-}
-
-bool checkNum(char *s){
-	size_t i;
-	for(i = 0; i < strlen(s); i++){
-		if(!(s[i] >= MIN_DIG && s[i] <= MAX_DIG)){
-			return false;
-		}
-	}
-	return true;
-}

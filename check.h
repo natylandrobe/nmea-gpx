@@ -2,19 +2,15 @@
 #define CHECK_H
 
 #include <stdbool.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
 #include "structData.h"
 
-unsigned char nmea_checksum(const char * s);
-bool checkLine(char *s);
-double convertirLon(const char lon[], char * cardinal);
-double convertirLat(const char lat[], char * cardinal);
-bool checkMembers(double lat, double lon, cal_t cal, long int cant);
-bool checkDia(int dia);
-bool checkMes(int mes);
-bool checkAnio(int anio);
-cal_t convertirCal(long int cal);
+typedef enum {ST_INV, ST_HELP, ST_OK, ST_EPTNULL} status_t;
+
+bool checkLine(char *s); //la usa main.c
+bool checkDia(int dia); //la usa args.c
+bool checkMes(int mes);//la usa args.c
+bool checkAnio(int anio);//la usa args.c
+bool checkNum(char *s);//la usa args.c
+bool checkMembers(double lat, double lon, cal_t cal, long int cant); //la usa cargarStruct
 
 #endif

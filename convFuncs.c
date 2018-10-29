@@ -1,9 +1,5 @@
-
-#include <stdlib.h>
-#include <math.h>
-#include <stdio.h>
 #include "structData.h"
-#include "xml.h"
+#include "defConv.h"
 
 double convertirLon(const char lon[], const char * cardinal){
 

@@ -1,17 +1,4 @@
-#include "check.h"
-#define CHECK "$GPGGA,"
-#define CANT_CSUM 2
-#define ASTERISCO '*'
-#define MAX_LAT 90.0
-#define MAX_LON 180.0
-#define MAX_CAL 8
-#define MAX_CANT 12
-#define MIN_CAL_CANT 0
-#define MIN_ANIOMESDIA 1
-#define MAX_MES 12
-#define MAX_DIA 31
-#define MAX_ANIO 9999
-#define END_STR '\0'
+#include "defCheck.h"
 
 bool checkLine(char *s){
 
@@ -60,4 +47,14 @@ bool checkMes(int mes){
 bool checkAnio(int anio){
 	
 	return !(anio < MIN_ANIOMESDIA || anio > MAX_ANIO);
+}
+
+bool checkNum(char *s){
+	int i;
+	for(i = 0; i < strlen(s); i++){
+		if(!(s[i] >= MIN_DIG && s[i] <= MAX_DIG)){
+			return false;
+		}
+	}
+	return true;
 }
