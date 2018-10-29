@@ -1,3 +1,6 @@
+#ifndef DEFCHECK_H
+#define DEFCHECK_H
+
 #include <stdbool.h>
 #include <string.h>
 #include "structData.h"
@@ -19,3 +22,5 @@
 #define END_STR '\0'
 
 unsigned char nmea_checksum(const char * s);
+
+#endif

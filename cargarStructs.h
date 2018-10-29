@@ -1,7 +1,9 @@
+#ifndef CARGARSTRUCTS_H
+#define CARGARSTRUCTS_H
+
 #include "check.h"
 #include <string.h>
 #include <sys/time.h>
-
 
 #define DELIM ","
 #define CANT_TOKEN 15
@@ -26,4 +28,6 @@
 double convertirLon(const char lon[], char * cardinal);
 double convertirLat(const char lat[], char * cardinal);
 cal_t convertirCal(long int cal);
+
+#endif
 

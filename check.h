@@ -2,7 +2,10 @@
 #define CHECK_H
 
 #include <stdbool.h>
+
+#ifndef STRUCTDATA_H
 #include "structData.h"
+#endif
 
 typedef enum {ST_INV, ST_HELP, ST_OK, ST_EPTNULL} status_t;
 

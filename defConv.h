@@ -1,3 +1,6 @@
+#ifndef DEFCONV_H
+#define DEFCONV_H
+
 #include <math.h>
 #include <string.h>
 
@@ -12,3 +15,5 @@
 #define LONG_MAX 18000
 #define VALOR_SW -1
 #define ERR_LATLON 181
+
+#endif
