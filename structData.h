@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef enum{invalido, fix_GPS, fix_DGPS, fix_PPS, real_time_kinematic, float_rtk, estimada, manual, simulacion} cal_t; //convFuncs.c y cargarStruct
+typedef enum{invalido, fix_GPS, fix_DGPS, fix_PPS, real_time_kinematic, float_rtk, estimada, manual, simulacion} cal_t; 
 
 struct fecha {
 	int dia;
