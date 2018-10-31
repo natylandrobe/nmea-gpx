@@ -62,7 +62,7 @@ bool checkAnio(int anio){
 	return !(anio < MIN_ANIOMESDIA || anio > MAX_ANIO);
 }
 
-/* Verifica que la cadena recibida sea un numero decimal */
+/* Verifica que la cadena recibida representa un numero decimal */
 bool checkNum(char *s){
 
 	int i;
