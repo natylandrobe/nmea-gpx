@@ -7,11 +7,11 @@
 
 typedef enum {ST_INV, ST_HELP, ST_OK, ST_EPTNULL} status_t;
 
-bool checkLine(char *s); //la usa main.c
-bool checkDia(int dia); //la usa args.c
-bool checkMes(int mes);//la usa args.c
-bool checkAnio(int anio);//la usa args.c
-bool checkNum(char *s);//la usa args.c
-bool checkMembers(double lat, double lon, cal_t cal, long int cant); //la usa cargarStruct
+bool checkLine(char *s); 
+bool checkDia(int dia); 
+bool checkMes(int mes);
+bool checkAnio(int anio);
+bool checkNum(char *s);
+bool checkMembers(double lat, double lon, cal_t cal, long int cant);
 
 #endif
