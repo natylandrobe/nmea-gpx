@@ -1,5 +1,6 @@
 #include "cargarStructs.h" 
 
+/* Separar en campos la sentencia, y cargar los datos procesados a la estructura */
 bool cargarStruct(char *s, struct data * newS, struct fecha date){
 
 	char *str, *check;
@@ -70,23 +71,29 @@ bool cargarStruct(char *s, struct data * newS, struct fecha date){
 	return true;
 }
 
+/* Verifica que la cadena tenga el formato adecuado, procesa los datos y los carga en la estrcutura */
 bool cargarFecha(char *s, struct fecha *date){
 
 	int fecha, mes, dia, anio;
+	char *check;
 
 	if(!s || !date || !(checkNum(s)) || strlen(s) != CANT_DIG_FECHA){
 
 		return false;
 	}
 
-	fecha = atoi(s);
+	fecha = strtol(s, &check, 10);
+
+	if(*check != END_STR){
+		return false;
+	}
 
 	anio = fecha / DIG_ANIO;
 	mes = (fecha % DIG_ANIO) / DIG_MES;
 	dia = ((fecha % DIG_ANIO) % DIG_MES);
 
 	(*date).anio = anio;
-	
+
 	if(checkMes(mes)){
 		date->mes = mes;
 	}
@@ -97,6 +104,7 @@ bool cargarFecha(char *s, struct fecha *date){
 	return true;
 }
 
+/* Carga la fecha del sistema a la estructura de tipo fecha */
 status_t defaultFecha(struct fecha *def){
 
 	time_t rawtime;

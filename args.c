@@ -1,6 +1,6 @@
 #include "defArgs.h"
 
-
+/* Lee los argumentos recibidos, verifica que sean correctos y decide que accion tomar segun el argumento */
 status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 	int i, argumento, mes, dia, anio;
 

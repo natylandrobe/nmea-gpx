@@ -1,14 +1,14 @@
 #include "structData.h"
 #include "xml.h"
 
-
+/* Imprime la metadata en XML*/
 bool printMetadata(char *name){
 
 	time_t rawtime;
    	struct tm *timeinfo;
 
    	if(!name){
-   		
+
    		return false;
    	}
 
@@ -37,6 +37,7 @@ bool printMetadata(char *name){
 	return true;
 }
 
+/* Imprime cierres del tag Trackseg */
 void printTrkC(void){
 
 	printf("%s%s\n%s%s\n%s\n",
@@ -45,6 +46,7 @@ void printTrkC(void){
 			GPX_C);
 }
 
+/* Imprime la estructura en formato XML */
 void printStruct(struct data track){
 
 	printf("%s%s%f%s%f%s\n%s%s%s%f%s\n%s%s%s%d-%d-%d%s%d:%d:%.3f%s%s\n%s%s\n",
@@ -62,6 +64,7 @@ void printStruct(struct data track){
 		SPC3, TRKPT_C);
 }
 
+/* Imprime mensaje de ayuda */
 void printHelp(void){
 
 	printf("%s\n", HELP);

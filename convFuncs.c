@@ -1,6 +1,7 @@
 #include "structData.h"
 #include "defConv.h"
 
+/* Devuelve la longitud como numero, positivo si es este, negativo si es oeste */
 double convertirLon(const char lon[], const char * cardinal){
 
 	char *check;
@@ -36,6 +37,7 @@ double convertirLon(const char lon[], const char * cardinal){
 	return longitud;
 }
 
+/* Devuelve la latitud como numero, positivo si es norte, negativo si es sur */
 double convertirLat(const char lat[], const char * cardinal){
 
 	char *check;
@@ -64,14 +66,14 @@ double convertirLat(const char lat[], const char * cardinal){
 	latitud = floor(latitud / DIGITO_GRADO) + fmod(latitud, DIGITO_GRADO) / MIN_POR_GRADO;
 	
 	if (*cardinal == CARD_SUR){
-		
+
 		latitud *= VALOR_SW;
 	}
 	
 	return latitud;
 }
 
-
+/* Devuelve la calidad en tipo enumerativo cal_t */
 cal_t convertirCal(long int cal){
 
 	switch (cal){
