@@ -14,7 +14,7 @@
 #define CARD_OESTE 'W'
 #define LONG_MAX 18000
 #define VALOR_SW -1
-#define ERR_LATLON 181
+#define ERR_LATLON 181.0
 #define END_STR '\0'
 #define ERR_CAL 9
 
