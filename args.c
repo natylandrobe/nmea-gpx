@@ -37,7 +37,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 							}
 							break;
 						case YEAR_C:
-							if(checkNum(argv[i+1]) && checkAnio(anio = atoi(argv[i+1]))){
+							if(checkNum(argv[i+1]) && checkAnio(anio = strtol(argv[i+1], NULL, 10))){
 								date->anio = anio;
 							}
 							else{
@@ -45,7 +45,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 							}
 							break;
 						case MONTH_C:
-							if(checkNum(argv[i+1]) && checkMes(mes = atoi(argv[i+1]))){
+							if(checkNum(argv[i+1]) && checkMes(mes = strtol(argv[i+1], NULL, 10))){
 								date->mes = mes;
 							}
 							else{
@@ -53,7 +53,7 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 							}
 							break;
 						case DAY_C:
-							if(checkNum(argv[i+1]) && checkDia(dia = atoi(argv[i+1]))){
+							if(checkNum(argv[i+1]) && checkDia(dia = strtol(argv[i+1], NULL, 10))){
 								date->dia = dia;
 							}
 
@@ -63,44 +63,61 @@ status_t takeArgs(int argc, char *argv[], char **name, struct fecha *date){
 							break;
 					}
 				}
+
 				else if(argumento == ARG_C){
+
 					if(!strcmp(argv[i], ARG_NAME)){
+
 						if(*argv[i+1] == ARG_C){
+
 							return ST_INV;
 						}
+
 						*name = argv[i+1];
 					}
+
 					else if(!strcmp(argv[i], ARG_FORMAT)){
+
 						if(!cargarFecha(argv[i+1], date)){
 							return ST_INV;
 						}
 					}
 								
 					else if(checkNum(argv[i+1])){
-						if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = atoi(argv[i+1]))){
+
+						if(!strcmp(argv[i], ARG_YEAR) && checkAnio(anio = strtol(argv[i+1], NULL, 10))){
 							date->anio = anio;
 						}
-						else if(!strcmp(argv[i], ARG_MONTH) && checkMes(mes = atoi(argv[i+1]))){
+
+						else if(!strcmp(argv[i], ARG_MONTH) && checkMes(mes = strtol(argv[i+1], NULL, 10))){
 							date->mes = mes;
 						}
-						else if(!strcmp(argv[i], ARG_DAY) && checkDia(dia = atoi(argv[i+1]))){
+
+						else if(!strcmp(argv[i], ARG_DAY) && checkDia(dia = strtol(argv[i+1], NULL, 10))){
 							date->dia = dia;
 						}
+
 						else{
+
 							return ST_INV;
 						}
 						
 					}
+
 					else{
+
 						return ST_INV;
 					}
 				}
+
 				else{
+
 					return ST_INV;
 				}
 			}
 		}
 	}
+
 	return ST_OK;
 }
 

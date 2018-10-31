@@ -1,9 +1,17 @@
 #include "structData.h"
 #include "xml.h"
 
-void printMetadata(char *name){
+
+bool printMetadata(char *name){
+
 	time_t rawtime;
    	struct tm *timeinfo;
+
+   	if(!name){
+   		
+   		return false;
+   	}
+
    	time(&rawtime);
    	timeinfo = localtime(&rawtime);
 
@@ -13,18 +21,20 @@ void printMetadata(char *name){
 		SPC,META,
 		SPC2,NAME,name,NAME_C,
 		SPC2,TIME,
-		(*timeinfo).tm_year + YEAR_DIFF,
-		(*timeinfo).tm_mon + MON_DIFF,
-		(*timeinfo).tm_mday,
+		timeinfo->tm_year + YEAR_DIFF,
+		timeinfo->tm_mon + MON_DIFF,
+		timeinfo->tm_mday,
 		T,
-		(*timeinfo).tm_hour,
-		(*timeinfo).tm_min,
+		timeinfo->tm_hour,
+		timeinfo->tm_min,
 		Z,
 		TIME_C,
-		(*timeinfo).tm_sec,
+		timeinfo->tm_sec,
 		SPC,META_C,
 		SPC,TRK,
 		SPC2,TRKSEG);
+
+	return true;
 }
 
 void printTrkC(void){
@@ -36,7 +46,6 @@ void printTrkC(void){
 }
 
 void printStruct(struct data track){
-
 
 	printf("%s%s%f%s%f%s\n%s%s%s%f%s\n%s%s%s%d-%d-%d%s%d:%d:%.3f%s%s\n%s%s\n",
 		SPC3, TRKPT_START,
@@ -54,5 +63,6 @@ void printStruct(struct data track){
 }
 
 void printHelp(void){
+
 	printf("%s\n", HELP);
 }

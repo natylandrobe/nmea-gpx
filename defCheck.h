@@ -1,7 +1,6 @@
 #ifndef DEFCHECK_H
 #define DEFCHECK_H
 
-#include <stdbool.h>
 #include <string.h>
 #include "structData.h"
 

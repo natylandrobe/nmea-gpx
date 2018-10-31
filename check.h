@@ -1,8 +1,6 @@
 #ifndef CHECK_H
 #define CHECK_H
 
-#include <stdbool.h>
-
 #ifndef STRUCTDATA_H
 #include "structData.h"
 #endif

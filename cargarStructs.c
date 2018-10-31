@@ -75,8 +75,10 @@ bool cargarFecha(char *s, struct fecha *date){
 	int fecha, mes, dia, anio;
 
 	if(!s || !date || !(checkNum(s)) || strlen(s) != CANT_DIG_FECHA){
+
 		return false;
 	}
+
 	fecha = atoi(s);
 
 	anio = fecha / DIG_ANIO;
@@ -84,6 +86,7 @@ bool cargarFecha(char *s, struct fecha *date){
 	dia = ((fecha % DIG_ANIO) % DIG_MES);
 
 	(*date).anio = anio;
+	
 	if(checkMes(mes)){
 		date->mes = mes;
 	}
