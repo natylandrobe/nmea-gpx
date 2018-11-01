@@ -37,7 +37,7 @@ bool printMetadata(char *name){
 	return true;
 }
 
-/* Imprime cierres del tag Trackseg */
+/* Imprime cierres de los tags Trackseg, Track y gpx */
 void printTrkC(void){
 
 	printf("%s%s\n%s%s\n%s\n",
